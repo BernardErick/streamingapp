@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package streaming;
+
+
+message User {
+  int32 id = 1;
+  string name = 2;
+}
+
+message Song {
+  int32 id = 1;
+  string name = 2;
+  string artist = 3;
+  string category = 4;
+  string release_date = 5;
+}
+
+message Playlist {
+  int32 id_usuario = 1;
+  string nome = 2;
+  repeated int32 songs = 3;
+}
+
+service UserService {
+  rpc ListAllUsers(PlaylistSongsRequest) returns (stream User);
+}
+
+service SongService {
+  rpc ListAllSongs(PlaylistSongsRequest) returns (stream Song);
+}
+
+service UserPlaylistService {
+  rpc ListUserPlaylists(UserPlaylistRequest) returns (stream Playlist);
+}
+
+service PlaylistSongsService {
+  rpc ListPlaylistSongs(PlaylistSongsRequest) returns (stream Song);
+}
+
+service SongPlaylistService {
+  rpc ListSongPlaylists(SongPlaylistRequest) returns (stream Playlist);
+}
+
+message UserPlaylistRequest {
+  int32 id_usuario = 1;
+}
+
+message PlaylistSongsRequest {
+  string nome = 1;
+}
+
+message SongPlaylistRequest {
+  string song_name = 1;
+}

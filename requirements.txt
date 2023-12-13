@@ -5,3 +5,5 @@ requests
 graphene
 flask_graphql
 graphql-core==2.3.1
+grpcio
+grpcio-tools
